@@ -12,8 +12,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # Builds and runs the real production image (same Dockerfile Railway
+  # uses) against the local Postgres above -- useful for testing the built
+  # image before deploying. For day-to-day dev with hot reload, just run
+  # `pnpm dev` on the host and `docker compose up postgres` for the DB.
   api:
-    build: .
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
     ports:
       - "5000:5000"
     depends_on:
@@ -22,10 +28,7 @@ services:
       - .env
     environment:
       - DB_HOST=postgres
-      - NODE_ENV=development
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - NODE_ENV=production
 
 volumes:
   postgres_data:

@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+**/target
+**/dist
+**/temp
+**/*.env
+**/*.env.local
+reports
