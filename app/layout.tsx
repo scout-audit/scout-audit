@@ -5,7 +5,6 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Scout Audit — Soroban Security Workspace',
   description: 'Prepare, analyze, and review Soroban smart contracts with Scout Audit.',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
