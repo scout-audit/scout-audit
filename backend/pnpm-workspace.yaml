@@ -1,0 +1,7 @@
+# backend/ is a standalone package, not part of the frontend's pnpm
+# workspace at the repo root. Without this file, pnpm walks up and finds
+# the root pnpm-workspace.yaml instead, which has caused it to resolve
+# installs against the wrong project context (see git history for the
+# fallout: silent lockfile desync, --ignore-workspace workarounds). This
+# file makes pnpm stop right here when run from within backend/.
+packages: []

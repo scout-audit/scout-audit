@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import { uploadController } from '../controllers/uploadController';
 import { optionalAuth } from '../middleware/auth';
+import { uploadRateLimit } from '../middleware/rateLimit';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AuthRequest } from '../types';
 import { BadRequestError } from '../utils/errors';
@@ -30,6 +31,7 @@ const upload = multer({
 // persisted, matching uploadController's userId-optional branch below.
 router.post(
   '/',
+  uploadRateLimit,
   optionalAuth,
   upload.single('contract'),
   asyncHandler(async (req: AuthRequest, res: Response) => {

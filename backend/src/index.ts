@@ -11,6 +11,12 @@ import logger from './utils/logger';
 
 const app: Express = express();
 
+// Railway (and most PaaS hosts) puts exactly one reverse proxy in front of
+// the container. Trusting it is what makes req.ip / express-rate-limit see
+// the real client IP from X-Forwarded-For instead of the proxy's own IP --
+// without this, rate limiting would count every visitor as the same client.
+app.set('trust proxy', 1);
+
 // ============ MIDDLEWARE ============
 
 app.use(corsMiddleware);
