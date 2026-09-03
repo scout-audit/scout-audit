@@ -1,16 +1,10 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    @media (prefers-color-scheme: light) {
-      .background { fill: black; }
-      .foreground { stroke: white; }
-    }
-    @media (prefers-color-scheme: dark) {
-      .background { fill: white; }
-      .foreground { stroke: black; }
-    }
-  </style>
-  <rect class="background" width="180" height="180" rx="37" />
-  <circle class="foreground" cx="68" cy="68" r="28" stroke-width="13" />
-  <path class="foreground" d="M88 88 L132 132" stroke-width="16" stroke-linecap="round" />
-  <path class="foreground" d="M54 69 L64 80 L86 52" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+  <rect fill="#176b78" width="180" height="180" rx="42" />
+  <g transform="translate(33,33) scale(4.75)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+    <path d="M7 12h10" />
+  </g>
 </svg>
