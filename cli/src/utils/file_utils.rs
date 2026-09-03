@@ -18,17 +18,23 @@ pub fn collect_rust_files(path: &Path) -> Vec<PathBuf> {
         .collect()
 }
 
-/// True if `path` (a file or directory) is part of a Cargo package, i.e. it
-/// or one of its ancestors has a `Cargo.toml`. Scout analyzes a crate, not
-/// a bare file, so running it against a `.rs` file with no crate context
-/// just produces a confusing error -- callers use this to skip Scout
-/// cleanly instead.
-pub fn is_cargo_project(path: &Path) -> bool {
+/// The nearest `Cargo.toml` for `path` (a file or directory), walking up
+/// through ancestors. Scout analyzes a crate, not a bare file, so running
+/// it against a `.rs` file with no crate context just produces a
+/// confusing error -- callers use this to skip Scout cleanly instead.
+pub fn find_cargo_manifest(path: &Path) -> Option<PathBuf> {
     let start = if path.is_dir() {
         path
     } else {
         path.parent().unwrap_or(path)
     };
 
-    start.ancestors().any(|dir| dir.join("Cargo.toml").is_file())
+    start
+        .ancestors()
+        .map(|dir| dir.join("Cargo.toml"))
+        .find(|manifest| manifest.is_file())
+}
+
+pub fn is_cargo_project(path: &Path) -> bool {
+    find_cargo_manifest(path).is_some()
 }
